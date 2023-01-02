@@ -22,7 +22,7 @@ import javax.swing.text.StyleConstants;
  * SINGLY LINKED LIST SIMULATOR
  * 
  * 1. Simple simulator with push,append,delete and search functionality
- * 2. More features to be added soon
+ * 2. More features to be added soon.
  */
 
 class simPage extends JPanel implements ActionListener
