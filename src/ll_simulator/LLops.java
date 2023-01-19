@@ -15,6 +15,7 @@ THIS FILE HAS A CLASS WHICH CONTAINS CODE FOR DIFFERENT LINKED LIST OPERATIONS
 
 public class LLops {
     
+    int dataFlag = 0;
     class Node {
         int data;
         Node next;
@@ -142,6 +143,35 @@ public class LLops {
             Node toDel = temp.next;
             
             temp.next = toDel.next;
+        }
+    }
+    
+    void deleteByData(int data)
+    {
+        if (head==null)
+        {
+            System.out.println("empty");
+            return;
+        }
+        Node temp = head;
+        Node prev = null;
+        while (temp!=null)
+        {
+            if (head.data==data)
+            {
+                dataFlag=1;
+                head = head.next;
+                break;
+            }
+            if (temp.data==data)
+            {
+                dataFlag=1;
+                prev.next = temp.next;
+                temp = null;
+                break;
+            }
+            prev = temp;
+            temp = temp.next;
         }
     }
 
