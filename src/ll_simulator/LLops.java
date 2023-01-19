@@ -9,7 +9,9 @@ package ll_simulator;
  * @author Rahul
  */
 
-
+/*
+THIS FILE HAS A CLASS WHICH CONTAINS CODE FOR DIFFERENT LINKED LIST OPERATIONS
+*/
 
 public class LLops {
     
