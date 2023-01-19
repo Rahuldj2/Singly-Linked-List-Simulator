@@ -35,8 +35,8 @@ class simPage extends JPanel implements ActionListener
     JLabel dynamicArrow;
     JFrame f;
     
-    JButton addBtn,appendBtn,delBtn,searchBtn;
-    JTextField addField,apField,delField,searchField;
+    JButton addBtn,appendBtn,delBtn,delDBtn,searchBtn;
+    JTextField addField,apField,delField,delDField,searchField;
     
     JPanel listUI;
     
@@ -114,21 +114,25 @@ class simPage extends JPanel implements ActionListener
         addField = new JTextField(3);
         apField = new JTextField(3);
         delField = new JTextField(3);
+        delDField = new JTextField(3);
         searchField = new JTextField(3);
         
         addBtn = new JButton("PUSH");
         appendBtn = new JButton("APPEND");
         delBtn = new JButton("DELETE(By Position)");
+        delDBtn = new JButton("DELETE(By Data)");
         searchBtn = new JButton("SEARCH");
         
         addBtn.setBackground(lightBlue);
         appendBtn.setBackground(lightBlue);
         delBtn.setBackground(lightBlue);
+        delDBtn.setBackground(lightBlue);
         searchBtn.setBackground(lightBlue);
         
         addBtn.addActionListener(this);
         appendBtn.addActionListener(this);
         delBtn.addActionListener(this);
+        delDBtn.addActionListener(this);
         searchBtn.addActionListener(this);
        
         add(addField);
@@ -141,6 +145,10 @@ class simPage extends JPanel implements ActionListener
         add(new JLabel("       "));
         add(delField);
         add(delBtn);
+        
+        add(new JLabel("       "));
+        add(delDField);
+        add(delDBtn);
         
         
         add(new JLabel("       "));
@@ -282,6 +290,42 @@ class simPage extends JPanel implements ActionListener
         }
         codeArea1.setText(codes.cDelPos);
         codeArea2.setText(codes.javaDelPos);
+    }
+    
+    
+    void writeDelDCode()
+    {
+        String[] spArr1 = l1.getText().split(":");
+        String[] spArr2 = l2.getText().split(":");
+        String label1,label2;
+        if (spArr1.length>1 || spArr2.length>1)
+        {
+            
+        spArr1[1] = " DELETION OF NODE(By data)";
+        spArr2[1] = " DELETION OF NODE(By data)";
+        label1 = spArr1[0]+":"+spArr1[1];
+        
+        
+//        label1+=" PUSH NODE";
+        l1.setText(label1);
+        
+        label2 = spArr2[0]+":"+spArr2[1];
+//        label2+=" PUSH NODE";
+        l2.setText(label2);
+        }
+        else
+        {
+            label1 = l1.getText();
+            label1+=" DELETION OF NODE(By data)";
+            l1.setText(label1);
+
+            label2 = l2.getText();
+            label2+=" DELETION OF NODE(By data)";
+            l2.setText(label2);
+        
+        }
+        codeArea1.setText(codes.cDelData);
+        codeArea2.setText(codes.javaDelData);
     }
     
     void writeSearchCode()
@@ -477,6 +521,41 @@ class simPage extends JPanel implements ActionListener
                                    "INFO", JOptionPane.INFORMATION_MESSAGE);
             }
             
+        }
+        
+        else if (e.getSource()==delDBtn)
+        {
+            if (!delDField.getText().equals(""))
+            {
+                int data = 0;
+                try
+                {
+                    data = Integer.parseInt(delDField.getText()); 
+                    simul.deleteByData(data);
+                    simul.printList();
+                    if (simul.dataFlag==0)
+                    {
+                        JOptionPane.showMessageDialog(listUI, "VALUE NOT FOUND",
+                                   "INFO", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    display();
+                    writeDelDCode();
+                    delField.setText("");
+                }
+                catch (NumberFormatException ep)
+                {
+                    displayNumFormatExp();
+                    delDField.setText("");
+                    System.out.println("NUMBER FORMAT EXCEPTION");
+                }
+                
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(listUI, "ENTER INTEGER DATA VALUE FOR DELETION",
+                                   "INFO", JOptionPane.INFORMATION_MESSAGE);
+            }
+
         }
         else if (e.getSource()==searchBtn)
         {
