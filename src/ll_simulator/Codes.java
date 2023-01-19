@@ -171,7 +171,46 @@ public class Codes {
                                 }
                             }
                         """;
-    
+    String javaDelData = """
+                         class Node {
+                            int data;
+                            Node next;
+
+                            Node(int data)
+                            {
+                                this.data = data;
+                                this.next = null;
+                            }
+                        }
+                        
+                        void deleteByData(int data)
+                        {
+                            if (head==null)
+                            {
+                                System.out.println("empty");
+                                return;
+                            }
+                            Node temp = head;
+                            Node prev = null;
+                            while (temp!=null)
+                            {
+                                if (head.data==data)
+                                {
+                                    head = head.next;
+                                    break;
+                                }
+                                if (temp.data==data)
+                                {
+                                    prev.next = temp.next;
+                                    temp = null;
+                                    break;
+                                }
+                                prev = temp;
+                                temp = temp.next;
+                            }
+                        }
+                         """;
+
     String javaSearch = """
                         class Node {
                                 int data;
@@ -258,6 +297,46 @@ public class Codes {
                       return head;
                     }
                      """;
+    
+    String cDelData = """
+                    struct Node
+                    {
+                      int data;
+                      struct Node *next;
+                    };
+                     
+                    struct Node *deleteByData(struct Node *head, int val) 
+                    {
+                      
+                      struct Node *prev, *temp;
+                      if (head==NULL)
+                      {
+                        return NULL;
+                      }
+                      prev = NULL;
+                      temp = head;
+
+                      while (temp!=null)
+                      {
+                        if (head.data==val)
+                        {
+                          head = head->next;
+                          break;
+                        }
+                        if(temp->data==val)
+                        {
+                          prev->next=temp->next;
+                          free(temp);
+                          break;
+                        }
+                        prev = temp;
+                        temp = temp->next;
+                      }
+                      return head;
+                    }  
+                      """;
+    
+    
     String cSearch = """
                     struct Node
                     {
